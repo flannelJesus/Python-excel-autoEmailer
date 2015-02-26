@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from templates import base_template
 from Config import fileConfig
 import locale
@@ -15,11 +13,12 @@ class CreateEmail:
         :type extra_content: str
         :return:
         """
+        month_count = round(month_count)
         locale.setlocale(locale.LC_ALL, "")
-        self.emails = [property_dict[u'YTC Directors Email'],
-                       property_dict[u'YTC Managers Email'],
-                       property_dict[u'YTC Accounts Email'],
-                       property_dict[u'YTC Property Manager']]
+        self.emails = [property_dict['YTC Directors Email'],
+                       property_dict['YTC Managers Email'],
+                       property_dict['YTC Accounts Email'],
+                       property_dict['YTC Property Manager']]
         while '' in self.emails:
             self.emails.remove('')
         self.template_args = {
@@ -34,8 +33,8 @@ class CreateEmail:
             'landlord':property_dict['Landlord'],
             'tenant':property_dict['Tenant'],
             'extra-content':extra_content,
-            'purchase-value':'£' + locale.currency(property_dict['Property Purchase Value'],
-                                                   grouping=True)[1:],
+            'purchase-value':locale.currency(property_dict['Property Purchase Value'],
+                                                   grouping=True),
             'property-size':str(property_dict['Property Size']) + ' sqFt'
         }
         self.html_email = ''
@@ -52,7 +51,7 @@ class CreateEmail:
         newEmail.send(self.subject, self.plain_text_email, self.html_email, self.emails)
 
 
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
 class MLStripper(HTMLParser):
     def __init__(self):

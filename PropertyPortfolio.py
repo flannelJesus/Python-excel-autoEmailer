@@ -21,7 +21,7 @@ class PropertyPortfolio:
         properties = []
         for cell in headerRow:
             headers.append(cell.value)
-        for rowNum in xrange(1, xlSheet.nrows):
+        for rowNum in range(1, xlSheet.nrows):
             row = xlSheet.row(rowNum)
             propertyDict = {}
             for i, cell in enumerate(row):

@@ -15,7 +15,7 @@ def send(subject, plain_text_message, html_message, to_list):
     :type to_list: list[str]
     """
     if not to_list:
-        to_list = u'superlistingteam@gmail.com'
+        to_list = 'superlistingteam@gmail.com'
     # Create a text/plain message
     msg = MIMEMultipart('alternative')
     config = Config.emailConfig()
@@ -24,7 +24,8 @@ def send(subject, plain_text_message, html_message, to_list):
     msg['To'] = ', '.join(to_list)
 
     if plain_text_message == '':
-        plain_text_message = 'This email has been sent as an HTML email; please view it in a capable email client.'
+        plain_text_message = 'This email has been sent as an HTML email; please view it in a ' \
+                             'capable email client.'
 
     part1 = MIMEText(plain_text_message, 'plain')
     part2 = MIMEText(html_message, 'html')

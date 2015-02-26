@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datetime
 from propertyEmails import CreateEmail
 import locale
@@ -16,24 +14,24 @@ class Property:
         self.send_break_clause_email()
 
     def send_lease_end_email(self):
-        leaseEnd = self.attributes[u'Lease End Date']
-        leaseEndEarliestAlert = self.attributes[u'Lease End Earliest Alert']
+        leaseEnd = self.attributes['Lease End Date']
+        leaseEndEarliestAlert = self.attributes['Lease End Earliest Alert']
         if need_email(leaseEnd, leaseEndEarliestAlert) and not (
-        self.attributes[u'Lease End Acknowledged']):
+        self.attributes['Lease End Acknowledged']):
             email = CreateEmail(self.attributes, monthsUntil(leaseEnd), 'Lease End', '')
             email.send()
 
     def send_rent_review_email(self):
-        reviewDates = [self.attributes[u'1st Review Date'], self.attributes[u'2nd Review Date'],
-                       self.attributes[u'3rd Review Date'], self.attributes[u'4th Review Date'], '']
+        reviewDates = [self.attributes['1st Review Date'], self.attributes['2nd Review Date'],
+                       self.attributes['3rd Review Date'], self.attributes['4th Review Date'], '']
         # empty string in above list in case all 4 have been acknowledged
-        outcomes = [self.attributes[u'1st Review Outcome/ Acknowledged'],
-                    self.attributes[u'2nd Review Outcome/ Acknowledged'],
-                    self.attributes[u'3rd Review Outcome/ Acknowledged'],
-                    self.attributes[u'4th Review Outcome/ Acknowledged']]
+        outcomes = [self.attributes['1st Review Outcome/ Acknowledged'],
+                    self.attributes['2nd Review Outcome/ Acknowledged'],
+                    self.attributes['3rd Review Outcome/ Acknowledged'],
+                    self.attributes['4th Review Outcome/ Acknowledged']]
         numDone = outcomes.index('')
         nextReview = reviewDates[numDone]
-        earliestAlert = self.attributes[u'Rent Review Earliest Alert']
+        earliestAlert = self.attributes['Rent Review Earliest Alert']
         if need_email(nextReview, earliestAlert):
             if numDone > 0:
                 currentRent = outcomes[numDone - 1]
@@ -47,10 +45,10 @@ class Property:
             email.send()
 
     def send_break_clause_email(self):
-        breakDate = self.attributes[u'Break Date']
-        earliestAlert = self.attributes[u'Break Clause Earliest Alert']
+        breakDate = self.attributes['Break Date']
+        earliestAlert = self.attributes['Break Clause Earliest Alert']
         if need_email(breakDate, earliestAlert) and \
-                not (self.attributes[u'Break Outcome/ Acknowledged']):
+                not (self.attributes['Break Outcome/ Acknowledged']):
             email = CreateEmail(self.attributes, monthsUntil(breakDate), 'Break Clause', '')
             email.send()
 
