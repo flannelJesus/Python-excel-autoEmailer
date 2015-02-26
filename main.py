@@ -6,7 +6,7 @@ import newEmail
 
 fileName = Config.fileConfig().fileName
 book = xlrd.open_workbook(fileName)
-scheduleSheet=book.sheet_by_name('Schedule')
+scheduleSheet = book.sheet_by_name('Schedule')
 book.release_resources()
 propertyPortfolio = PropertyPortfolio(scheduleSheet)
 propertyPortfolio.sendEmails()
