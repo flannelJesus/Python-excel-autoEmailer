@@ -2,7 +2,7 @@ def base_template():
     return """<h2>{month-count} Month Warning</h2>
 <p><a href="{path-to-file}">click to see Properties</a></p>
 <p>This is a {email-type} alert for the following property:</p>
-<p>{property-name}</p>
+<h3>{property-name}</h3>
 <p>
 	{address-lines} <br>
 	{town} <br>
